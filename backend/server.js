@@ -8,7 +8,7 @@ app.get('/', (req, res) => {
   res.send('API is running...')
 
 })
-console.log(products)
+
 
 app.get('/api/products', (req, res) => {
   res.json(products)
