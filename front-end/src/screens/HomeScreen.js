@@ -5,6 +5,7 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 import Product from '../components/Product'
 import { listProducts } from '../actions/productActions'
+import { Fragment } from 'react'
 
 const HomeScreen = () => {
   const dispatch = useDispatch()
@@ -16,24 +17,25 @@ const HomeScreen = () => {
   }, [dispatch])
 
   return (
-    <>
+    <Fragment>
       <h1>Latest Products</h1>
       {  loading ? (
-        <Loader/>
-        ) : error ?(
+        <Loader />
+        ) : error ? (
           <Message variant='danger'>{error}</Message>
         ) : (
       <Row>
        {products.map( (product) => (
          
-          <Col key = {product._id} sm={12} md={6} lg={4}>
+          <Col key = {product._id} sm={12} md={6} lg={4} xl={3}>
             <Product product = {product} />
           </Col>
 
        ))}
       </Row>
-    )}
-    </>
+    )
+  }
+    </Fragment>
   )
 }
 

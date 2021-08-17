@@ -1,7 +1,7 @@
 {
   "name": "ecompro",
   "version": "1.0.0",
-  "description": "mern shopping cart",
+  "description": "MERN shopping cart",
   "main": "server.js",
   "type": "module",
   "scripts": {
