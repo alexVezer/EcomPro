@@ -18,7 +18,8 @@ const PlaceOrderScreen = ({history}) => {
         return Math.round((num * 100)/100).toFixed(2)
     }
     
-    cart.itemsPrice = addDecimals(cart.cartItems.reduce(
+    cart.itemsPrice = addDecimals(
+        cart.cartItems.reduce(
         (acc, item) => acc + item.price * item.qty, 0)
     )
 
@@ -32,7 +33,7 @@ const PlaceOrderScreen = ({history}) => {
     const { order, success, error } = orderCreate
 
     console.log(orderCreate)
-    
+
     useEffect(() => {
         if(success) {
             history.push(`/order/${order._id}`)
