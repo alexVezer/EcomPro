@@ -3,7 +3,7 @@ import { Row, Col, ListGroup, Image, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
-import PayPalButton from "react-paypal-button-v2";
+import {PayPalButton } from "react-paypal-button-v2";
 import { getOrderDetails, payOrder } from "../actions/orderActions";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -35,17 +35,17 @@ const OrderScreen = ({ match }) => {
 
   useEffect(() => {
     const addPayPalScript = async () => {
-      const { data: clientId } = await axios.get("/api/config/paypal");
-      const script = document.createElement("script");
-      script.type = "text/javascript";
-      script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
-      script.async = true;
+      const { data: clientId } = await axios.get('/api/config/paypal')
+      const script = document.createElement('script')
+      script.type = 'text/javascript'
+      script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`
+      script.async = true
       script.onload = () => {
-        setSdkReady(true);
-      };
+        setSdkReady(true)
+      }
 
-      document.body.appendChild(script);
-    };
+      document.body.appendChild(script)
+    }
 
     if (!order || order._id !== orderId || successPay) {
       dispatch({ type: ORDER_PAY_RESET });
