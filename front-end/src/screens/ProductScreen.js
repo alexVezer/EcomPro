@@ -8,7 +8,7 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { Fragment } from 'react'
 import { PRODUCT_CREATE_REVIEW_RESET} from '../constants/productConstants'
-
+import Meta from '../components/Meta'
 
 const ProductScreen = ({ history, match }) => {
   const [qty, setQty]= useState(1)
@@ -54,11 +54,13 @@ const ProductScreen = ({ history, match }) => {
     
   return ( 
   <Fragment>
+  
     <Link className='btn btn-light my-3' to='/'>
       Go Back
     </Link>
     {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : (
       <Fragment>
+      <Meta title={product.name} description={product.description}/>
       <Row>
       <Col md={6}>
         <Image src={product.image} alt={product.name} fluid/>
