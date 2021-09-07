@@ -1,19 +1,20 @@
 import React, { useEffect} from 'react'
 import { LinkContainer } from 'react-router-bootstrap'
-import { Table, Button, Col, Row } from 'react-bootstrap'
+import { Table, Button, Col, Row, Pagination } from 'react-bootstrap'
 import { useDispatch, useSelector} from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { listProducts, deleteProduct, createProduct } from '../actions/productActions'
 import { Fragment } from 'react'
 import { PRODUCT_CREATE_RESET } from '../constants/productConstants'
+import Paginate from '../components/Paginate'
 
-
-const ProductListScreen = ({ history }) => {
+const ProductListScreen = ({ match, history }) => {
+    const pageNumber = match.params.pageNumber
     const dispatch= useDispatch()
 
     const productList = useSelector(state => state.productList)
-    const {loading, error, products} = productList
+    const {loading, error, products, page, pages} = productList
 
     const productDelete = useSelector(state => state.productDelete)
     const {loading:loadingDelete, error:errorDelete, success:successDelete} = productDelete
@@ -39,9 +40,9 @@ const ProductListScreen = ({ history }) => {
         if(successCreate) {
             history.push(`/admin/product/${createdProduct._id}/edit`)
         } else {
-            dispatch(listProducts())
+            dispatch(listProducts('', pageNumber))
         }
-    }, [dispatch, history, userInfo, successDelete, successCreate, createdProduct])
+    }, [dispatch, history, userInfo, successDelete, successCreate, createdProduct, pageNumber])
 
 const createProductHandler = (product) => {
     dispatch(createProduct())
@@ -74,7 +75,8 @@ const deleteHandler = (id) => {
         {errorCreate && <Message variant='danger'>{errorCreate}</Message>}
 
             {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : (
-            <Table striped bordered hover responsive className='table-sm'>
+            <Fragment>
+                <Table striped bordered hover responsive className='table-sm'>
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -112,6 +114,8 @@ const deleteHandler = (id) => {
                     }
                 </tbody>
             </Table>
+            <Paginate pages={pages} page={page} isAdmin={true}/>
+            </Fragment>
         )}
         </Fragment>
     )

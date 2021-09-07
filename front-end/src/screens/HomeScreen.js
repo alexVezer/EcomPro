@@ -3,6 +3,7 @@ import { useDispatch, useSelector} from 'react-redux'
 import { Row, Col } from 'react-bootstrap'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
+import Paginate from '../components/Paginate'
 import Product from '../components/Product'
 import { listProducts } from '../actions/productActions'
 import { Fragment } from 'react'
@@ -10,14 +11,18 @@ import { Fragment } from 'react'
 const HomeScreen = ({ match }) => {
   const keyword = match.params.keyword
 
+  const pageNumber = match.params.pageNumber || 1
+
+
+
   const dispatch = useDispatch()
 
   const productList = useSelector(state => state.productList)
-  const { loading, error, products } = productList
+  const { loading, error, products, page, pages } = productList
 
   useEffect(() => {
-   dispatch(listProducts(keyword))
-  }, [dispatch, keyword])
+   dispatch(listProducts(keyword, pageNumber))
+  }, [dispatch, keyword, pageNumber])
 
   return (
     <Fragment>
@@ -27,6 +32,7 @@ const HomeScreen = ({ match }) => {
         ) : error ? (
           <Message variant='danger'>{error}</Message>
         ) : (
+      <Fragment>
       <Row>
        {products.map( (product) => (
          
@@ -36,6 +42,8 @@ const HomeScreen = ({ match }) => {
 
        ))}
       </Row>
+      <Paginate pages={pages} page={page} keyword={keyword ? keyword : ''} />
+      </Fragment>
     )
   }
     </Fragment>
