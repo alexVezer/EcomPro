@@ -4,6 +4,7 @@
   "secure": "false",
   "version": "0.1.0",
   "private": "true",
+  "homepage": ".",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.8",
     "@testing-library/react": "^11.2.2",
@@ -20,8 +21,7 @@
     "react-scripts": "^1.1.5",
     "redux": "^4.1.0",
     "redux-devtools-extension": "^2.13.9",
-    "redux-thunk": "^2.3.0",
-    "web-vitals": "^0.2.4"
+    "redux-thunk": "^2.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -38,7 +38,7 @@
   "browserslist": {
     "production": [
       ">0.2%",
-      "not dead",
+      "not ie <= 11",
       "not op_mini all"
     ],
     "development": [

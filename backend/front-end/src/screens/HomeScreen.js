@@ -9,7 +9,6 @@ import Product from '../components/Product'
 import { listProducts } from '../actions/productActions'
 import { Fragment } from 'react'
 import ProductCarousel from '../components/ProductCarousel'
-import {Helmet} from 'react-helmet'
 import Meta from '../components/Meta'
 
 const HomeScreen = ({ match }) => {
